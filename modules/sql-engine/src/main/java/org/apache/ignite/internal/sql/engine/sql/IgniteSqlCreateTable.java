@@ -160,7 +160,7 @@ public class IgniteSqlCreateTable extends SqlCreate {
     }
 
     /**
-     * Get storage profile identifier to create teh table.
+     * Get storage profile identifier to create the table.
      */
     public @Nullable SqlNode storageProfile() {
         return storageProfile;
