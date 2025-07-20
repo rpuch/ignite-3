@@ -45,6 +45,8 @@ import org.apache.ignite.internal.testframework.ExecutorServiceExtension;
 import org.apache.ignite.internal.testframework.IgniteAbstractTest;
 import org.apache.ignite.internal.testframework.InjectExecutorService;
 import org.apache.ignite.internal.tx.configuration.TransactionConfiguration;
+import org.apache.ignite.internal.components.PropertiesContainer;
+import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.tx.impl.HeapLockManager;
 import org.apache.ignite.internal.tx.impl.HeapLockManager.LockState;
 import org.apache.ignite.internal.tx.impl.RemotelyTriggeredResourceRegistry;
@@ -161,7 +163,8 @@ public class ItLockTableTest extends IgniteAbstractTest {
                         resourcesRegistry,
                         transactionInflights,
                         lowWatermark,
-                        commonExecutor
+                        commonExecutor,
+                        new PropertiesContainer(new SystemPropertiesNodeProperties())
                 );
             }
         };

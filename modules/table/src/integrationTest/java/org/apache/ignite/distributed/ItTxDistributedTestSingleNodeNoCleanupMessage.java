@@ -34,6 +34,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 import org.apache.ignite.internal.catalog.CatalogService;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.configuration.SystemDistributedConfiguration;
 import org.apache.ignite.internal.configuration.SystemLocalConfiguration;
@@ -148,7 +149,8 @@ public class ItTxDistributedTestSingleNodeNoCleanupMessage extends TxAbstractTes
                         resourcesRegistry,
                         transactionInflights,
                         lowWatermark,
-                        commonExecutor
+                        commonExecutor,
+                        new PropertiesContainer(new SystemPropertiesNodeProperties())
                 ) {
                     @Override
                     public CompletableFuture<Void> executeWriteIntentSwitchAsync(Runnable runnable) {

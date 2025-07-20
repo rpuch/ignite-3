@@ -106,6 +106,8 @@ import org.apache.ignite.internal.table.impl.DummySchemaManagerImpl;
 import org.apache.ignite.internal.testframework.BaseIgniteAbstractTest;
 import org.apache.ignite.internal.testframework.ExecutorServiceExtension;
 import org.apache.ignite.internal.testframework.InjectExecutorService;
+import org.apache.ignite.internal.components.PropertiesContainer;
+import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.tx.LockManager;
 import org.apache.ignite.internal.tx.PendingTxPartitionEnlistment;
 import org.apache.ignite.internal.tx.TxManager;
@@ -221,7 +223,8 @@ public class ItColocationTest extends BaseIgniteAbstractTest {
                 resourcesRegistry,
                 transactionInflights,
                 new TestLowWatermark(),
-                commonExecutor
+                commonExecutor,
+                new PropertiesContainer(new SystemPropertiesNodeProperties())
         ) {
             @Override
             public CompletableFuture<Void> finish(
