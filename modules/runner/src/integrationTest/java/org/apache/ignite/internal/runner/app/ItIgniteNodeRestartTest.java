@@ -88,6 +88,7 @@ import org.apache.ignite.IgniteServer;
 import org.apache.ignite.internal.BaseIgniteRestartTest;
 import org.apache.ignite.internal.app.IgniteImpl;
 import org.apache.ignite.internal.app.NodePropertiesImpl;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.app.ThreadPoolsManager;
 import org.apache.ignite.internal.catalog.CatalogManager;
 import org.apache.ignite.internal.catalog.CatalogManagerImpl;
@@ -645,7 +646,7 @@ public class ItIgniteNodeRestartTest extends BaseIgniteRestartTest {
                 lowWatermark,
                 threadPoolsManager.commonScheduler(),
                 failureProcessor,
-                nodeProperties
+                new PropertiesContainer(nodeProperties)
         );
 
         ResourceVacuumManager resourceVacuumManager = new ResourceVacuumManager(

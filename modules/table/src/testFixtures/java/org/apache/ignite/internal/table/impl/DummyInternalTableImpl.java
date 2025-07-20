@@ -51,6 +51,7 @@ import org.apache.ignite.internal.catalog.CatalogService;
 import org.apache.ignite.internal.catalog.descriptors.CatalogIndexDescriptor;
 import org.apache.ignite.internal.catalog.descriptors.CatalogTableDescriptor;
 import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.configuration.SystemDistributedConfiguration;
 import org.apache.ignite.internal.failure.FailureProcessor;
 import org.apache.ignite.internal.hlc.ClockService;
@@ -695,7 +696,8 @@ public class DummyInternalTableImpl extends InternalTableImpl {
                 resourcesRegistry,
                 transactionInflights,
                 new TestLowWatermark(),
-                COMMON_SCHEDULER
+                COMMON_SCHEDULER,
+                new PropertiesContainer(new SystemPropertiesNodeProperties())
         );
 
         assertThat(txManager.startAsync(new ComponentContext()), willCompleteSuccessfully());

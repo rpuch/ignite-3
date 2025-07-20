@@ -61,6 +61,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
 import org.apache.ignite.internal.components.NodeProperties;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.configuration.SystemDistributedConfiguration;
 import org.apache.ignite.internal.configuration.SystemPropertyView;
@@ -279,7 +280,8 @@ public class TxManagerImpl implements TxManager, NetworkMessageHandler, SystemVi
             RemotelyTriggeredResourceRegistry resourcesRegistry,
             TransactionInflights transactionInflights,
             LowWatermark lowWatermark,
-            ScheduledExecutorService commonScheduler
+            ScheduledExecutorService commonScheduler,
+            PropertiesContainer propertiesContainer
     ) {
         this(
                 clusterService.nodeName(),
@@ -300,7 +302,7 @@ public class TxManagerImpl implements TxManager, NetworkMessageHandler, SystemVi
                 lowWatermark,
                 commonScheduler,
                 new FailureManager(new NoOpFailureHandler()),
-                new SystemPropertiesNodeProperties()
+                propertiesContainer
         );
     }
 
@@ -342,7 +344,7 @@ public class TxManagerImpl implements TxManager, NetworkMessageHandler, SystemVi
             LowWatermark lowWatermark,
             ScheduledExecutorService commonScheduler,
             FailureProcessor failureProcessor,
-            NodeProperties nodeProperties
+            PropertiesContainer propertiesContainer
     ) {
         this.txConfig = txConfig;
         this.systemCfg = systemCfg;
@@ -362,7 +364,7 @@ public class TxManagerImpl implements TxManager, NetworkMessageHandler, SystemVi
         this.replicaService = replicaService;
         this.commonScheduler = commonScheduler;
         this.failureProcessor = failureProcessor;
-        this.nodeProperties = nodeProperties;
+        this.nodeProperties = propertiesContainer.nodeProperties();
 
         placementDriverHelper = new PlacementDriverHelper(placementDriver, clockService);
 

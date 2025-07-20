@@ -54,6 +54,8 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.LongSupplier;
 import org.apache.ignite.internal.app.NodePropertiesImpl;
+import org.apache.ignite.internal.components.PropertiesContainer;
+import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.app.ThreadPoolsManager;
 import org.apache.ignite.internal.catalog.CatalogManager;
 import org.apache.ignite.internal.catalog.CatalogManagerImpl;
@@ -622,7 +624,8 @@ public class Node {
                 resourcesRegistry,
                 transactionInflights,
                 lowWatermark,
-                threadPoolsManager.commonScheduler()
+                threadPoolsManager.commonScheduler(),
+                new PropertiesContainer(new SystemPropertiesNodeProperties())
         );
 
         volatileLogStorageFactoryCreator = new VolatileLogStorageFactoryCreator(name, workDir.resolve("volatile-log-spillout-" + name));

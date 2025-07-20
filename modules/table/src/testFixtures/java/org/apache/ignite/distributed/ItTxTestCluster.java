@@ -77,6 +77,7 @@ import org.apache.ignite.internal.cluster.management.topology.api.LogicalTopolog
 import org.apache.ignite.internal.cluster.management.topology.api.LogicalTopologyService;
 import org.apache.ignite.internal.cluster.management.topology.api.LogicalTopologySnapshot;
 import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.configuration.RaftGroupOptionsConfigHelper;
 import org.apache.ignite.internal.configuration.SystemDistributedConfiguration;
 import org.apache.ignite.internal.failure.NoOpFailureManager;
@@ -614,7 +615,7 @@ public class ItTxTestCluster {
                 lowWatermark,
                 executor,
                 new NoOpFailureManager(),
-                new SystemPropertiesNodeProperties()
+                new PropertiesContainer(new SystemPropertiesNodeProperties())
         );
     }
 
@@ -1328,7 +1329,7 @@ public class ItTxTestCluster {
                 lowWatermark,
                 executor,
                 new NoOpFailureManager(),
-                new SystemPropertiesNodeProperties()
+                new PropertiesContainer(new SystemPropertiesNodeProperties())
         );
 
         clientResourceVacuumManager = new ResourceVacuumManager(

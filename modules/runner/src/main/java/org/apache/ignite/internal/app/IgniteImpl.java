@@ -93,6 +93,7 @@ import org.apache.ignite.internal.cluster.management.topology.api.LogicalTopolog
 import org.apache.ignite.internal.cluster.management.topology.api.LogicalTopologySnapshot;
 import org.apache.ignite.internal.components.LongJvmPauseDetector;
 import org.apache.ignite.internal.components.NodeProperties;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.compute.AntiHijackIgniteCompute;
 import org.apache.ignite.internal.compute.ComputeComponentImpl;
 import org.apache.ignite.internal.compute.IgniteComputeImpl;
@@ -328,6 +329,8 @@ public class IgniteImpl implements Ignite {
 
     private final NodePropertiesImpl nodeProperties;
 
+    private final PropertiesContainer propertiesContainer;
+
     /** Sql query engine. */
     private final SqlQueryProcessor qryEngine;
 
@@ -537,6 +540,7 @@ public class IgniteImpl implements Ignite {
         vaultMgr = new VaultManager(new PersistentVaultService(vaultPath(workDir)));
 
         nodeProperties = new NodePropertiesImpl(vaultMgr);
+        propertiesContainer = new PropertiesContainer(nodeProperties);
 
         ConfigurationModules modules = loadConfigurationModules(serviceProviderClassLoader);
 
@@ -1036,7 +1040,7 @@ public class IgniteImpl implements Ignite {
                 lowWatermark,
                 threadPoolsManager.commonScheduler(),
                 failureManager,
-                nodeProperties
+                propertiesContainer
         );
 
         sharedTxStateStorage = new TxStateRocksDbSharedStorage(

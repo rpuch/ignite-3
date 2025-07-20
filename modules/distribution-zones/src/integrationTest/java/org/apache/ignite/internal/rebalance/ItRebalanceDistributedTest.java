@@ -127,6 +127,7 @@ import org.apache.ignite.internal.cluster.management.topology.LogicalTopologyImp
 import org.apache.ignite.internal.cluster.management.topology.LogicalTopologyServiceImpl;
 import org.apache.ignite.internal.cluster.management.topology.api.LogicalTopologySnapshot;
 import org.apache.ignite.internal.components.NodeProperties;
+import org.apache.ignite.internal.components.PropertiesContainer;
 import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.configuration.ClusterConfiguration;
 import org.apache.ignite.internal.configuration.ComponentWorkingDir;
@@ -1496,7 +1497,8 @@ public class ItRebalanceDistributedTest extends BaseIgniteAbstractTest {
                     resourcesRegistry,
                     transactionInflights,
                     lowWatermark,
-                    commonScheduledExecutorService
+                    commonScheduledExecutorService,
+                    new PropertiesContainer(nodeProperties)
             );
 
             rebalanceScheduler = new ScheduledThreadPoolExecutor(REBALANCE_SCHEDULER_POOL_SIZE,

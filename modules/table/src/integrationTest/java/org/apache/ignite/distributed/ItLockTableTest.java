@@ -52,6 +52,8 @@ import org.apache.ignite.internal.tx.impl.TransactionIdGenerator;
 import org.apache.ignite.internal.tx.impl.TransactionInflights;
 import org.apache.ignite.internal.tx.impl.TxManagerImpl;
 import org.apache.ignite.internal.tx.test.TestLocalRwTxCounter;
+import org.apache.ignite.internal.components.PropertiesContainer;
+import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.type.NativeTypes;
 import org.apache.ignite.network.ClusterNode;
 import org.apache.ignite.raft.jraft.test.TestUtils;
@@ -161,7 +163,8 @@ public class ItLockTableTest extends IgniteAbstractTest {
                         resourcesRegistry,
                         transactionInflights,
                         lowWatermark,
-                        commonExecutor
+                        commonExecutor,
+                        new PropertiesContainer(new SystemPropertiesNodeProperties())
                 );
             }
         };

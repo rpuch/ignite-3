@@ -82,6 +82,8 @@ import org.apache.ignite.internal.sql.engine.framework.ArrayRowHandler;
 import org.apache.ignite.internal.sql.engine.framework.DataProvider;
 import org.apache.ignite.internal.sql.engine.framework.TestBuilders;
 import org.apache.ignite.internal.sql.engine.type.IgniteTypeFactory;
+import org.apache.ignite.internal.components.PropertiesContainer;
+import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.sql.engine.util.TypeUtils;
 import org.apache.ignite.internal.storage.engine.MvTableStorage;
 import org.apache.ignite.internal.table.StreamerReceiverRunner;
@@ -193,7 +195,8 @@ public class TableScanNodeExecutionTest extends AbstractExecutionTest<Object[]> 
                     resourcesRegistry,
                     transactionInflights,
                     new TestLowWatermark(),
-                    commonExecutor
+                    commonExecutor,
+                    new PropertiesContainer(new SystemPropertiesNodeProperties())
             );
 
             assertThat(txManager.startAsync(new ComponentContext()), willCompleteSuccessfully());
