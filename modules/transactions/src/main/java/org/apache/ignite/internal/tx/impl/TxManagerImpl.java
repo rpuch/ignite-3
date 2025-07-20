@@ -62,7 +62,6 @@ import java.util.function.Function;
 import java.util.function.LongSupplier;
 import org.apache.ignite.internal.components.NodeProperties;
 import org.apache.ignite.internal.components.PropertiesContainer;
-import org.apache.ignite.internal.components.SystemPropertiesNodeProperties;
 import org.apache.ignite.internal.configuration.SystemDistributedConfiguration;
 import org.apache.ignite.internal.configuration.SystemPropertyView;
 import org.apache.ignite.internal.event.EventListener;
